@@ -1,8 +1,14 @@
+    <head>
+        <meta charset="utf-8" />
+    </head>
 <?php 
 require_once('controler/frontend.php');
 require_once('controler/backend.php');
+
 if (isset($_GET['action'])) {
+
     if ($_GET['action'] == 'addPost') {
+        $content = htmlspecialchars($_POST['content']);
             if (!empty($_POST['title']) && !empty($_POST['content'])) {
                 addPost($_POST['title'], $_POST['content']);
             }
@@ -28,6 +34,9 @@ if (isset($_GET['action'])) {
             }
     }
     if ($_GET['action'] == 'getConnect') {
+            //$pseudo = htmlspecialchars($_POST['pseudo']);
+            //$password = sha1($_POST['password']);
+
             echo 'routeur';
             if(!empty($_POST['pseudo']) && !empty($_POST['password'])) {
                getConnect($_POST['pseudo'], $_POST['password']);

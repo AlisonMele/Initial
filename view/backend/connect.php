@@ -1,4 +1,7 @@
-    <h1>Billet simple pour Alaska!</h1>
+<head>
+    <meta charset="utf-8" />
+</head>
+ <h1>Billet simple pour Alaska!</h1>
         <h2>Les derniers billets</h2>
 
             <p>Veuillez entrer l'identifiant et le mot de passe :</p>

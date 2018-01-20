@@ -23,7 +23,7 @@ class PostManager extends Manager
 	{
 		$db = $this->dbConnect();
 		$post = $db->prepare('INSERT INTO `posts`(`title`, `content`, `creation_date`) VALUES (?, ?, NOW())');
-		$affectedLines = $post->execute(array($title, $content));
+		$affectedLines = $post->execute(array($title, htmlspecialchars($content)));
 
 		return $affectedLines;
 	}

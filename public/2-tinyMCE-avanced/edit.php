@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 <head>
 	<title>Billet simple pour l'Alaska</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="title" content="editeur TinyMCE"/>
 	
 	<script type="text/javascript" src="tiny_mce/tiny_mce.js"></script>
 	<script type="text/javascript">
 		tinyMCE.init({
 			// type de mode
-			mode : "exact", 
+			mode : "exact",
 			// id ou class, des textareas
 			elements : "text,content", 
 			// en mode avancé, cela permet de choisir les plugins

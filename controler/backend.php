@@ -9,20 +9,28 @@ function listReport()
 
     require('view/backend/admin.php');
 }
-/*function getConnect($pseudo, $password)
+function getConnect()
 {
 	echo 'controleur';
-	if (!$_SESSION['secure']) {
-		header('location: view/backend/connect.php');
-	}
  	$connect = new ConnectManager();
- 	if($pseudo = $_POST['pseudo'] && $password = $_POST['password']) {
- 	  	require ('view/backend/admin.php');
+ 	echo 'pdo ok';
+ 	$connexion = $connect->getConnect();
+ 	echo 'appel ok';
+ 	echo $connexion;
+ 	if($connexion == 1) {
+ 	 		echo "Pseudo ok";
+ 	   	require ('view/backend/admin.php');
+ 	
     	}
-	else {
+	else{
 		echo 'Mauvais identifiant ou mot de passe';
+		echo $_POST['pseudo'];
+		echo $_POST['password'];
+
+
+
 		}
-	}*/
+}
 function addPost($title, $content)
 {
 
