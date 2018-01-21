@@ -11,24 +11,20 @@ function listReport()
 }
 function getConnect()
 {
-	echo 'controleur';
+	//echo 'controleur';
  	$connect = new ConnectManager();
- 	echo 'pdo ok';
+
  	$connexion = $connect->getConnect();
- 	echo 'appel ok';
- 	echo $connexion;
+ 	
+ 	//echo $connexion;
  	if($connexion == 1) {
- 	 		echo "Pseudo ok";
+ 	 	//echo "pseudo ok";
  	   	require ('view/backend/admin.php');
  	
     	}
 	else{
 		echo 'Mauvais identifiant ou mot de passe';
-		echo $_POST['pseudo'];
-		echo $_POST['password'];
-
-
-
+		require ('view/backend/connect.php');
 		}
 }
 function addPost($title, $content)
