@@ -26,11 +26,7 @@ class ReportCommentmodel extends Manager
 	public function listReport()
 	{
 		$db = $this->dbConnect();
-		$listReport = $db->prepare('SELECT id, pseudo, comment_id, report_date FROM reportcomments ORDER BY report_date DESC LIMIT 0, 5');
-		$listReport -> bindParam(':id', $id, PDO::PARAM_STR);
-		$listReport -> bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-		$listReport -> bindParam(':commentId', $commentId, PDO::PARAM_STR);
-		$listReport -> bindParam(':report_date', $report_date, PDO::PARAM_STR);
+		$listReport = $db->prepare('SELECT * FROM `reportcomments` HAVING COUNT (`comment_id`) > 9');
 		$listReport->execute();
 		return $listReport ->fetch();
 	}

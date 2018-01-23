@@ -49,6 +49,34 @@ function draftCopy($title, $content)
 	$affectedLines = $draftCopy->draftCopy($title, $content);
 
 	if ($affectedLines === false) {
+		throw new Exception('Impossible d\'enregistrer le brouillon');
+	}
+		else {
+			require('view/backend/admin.php');
+		}
+}
+function editPost($title, $content)
+{
+	echo 'controleur';
+	$editPost = new PostManager();
+
+	$post = $editPost->editPost($title, $content);
+
+	if ($post === false) {
+		throw new Exception('Impossible d\'afficher l`\'article');
+	}
+		else {
+			require('public/2-tinyMCE-avanced/edit.php');
+		}
+}
+function removePost($title, $content)
+{
+	echo 'controleur';
+	$removePost = new PostManager();
+
+	$remove = $removePost->removePost($title, $content);
+
+	if ($remove === false) {
 		throw new Exception('Impossible d\'ajouter l`\'article');
 	}
 		else {

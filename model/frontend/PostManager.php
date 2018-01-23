@@ -30,16 +30,15 @@ class PostManager extends Manager
 		public function draftCopy($title, $content)
 	{
 		$db = $this->dbConnect();
-		$post = $db->prepare('INSERT INTO `draft`(`title`, `content`, `creation_date`) VALUES (?, ?, NOW())');
+		$post = $db->prepare('INSERT INTO `posts`(`title`, `content`, `creation_date`) VALUES (?, ?, NOW())');
 		$affectedLines = $post->execute(array($title, $content));
 
 		return $affectedLines;
 	}
-	/*
 		public function editPost()
 	{
 		$db = $this->dbConnect();
-		$post = $db->prepare('UPDATE `posts` SET `title`=:title,`content`=:content,`creation_date`=NOW(),`statut`=[value-5] WHERE 1');
+		$post = $db->prepare('UPDATE `posts` SET `title`=:title,`content`=:content,`creation_date`=NOW(),`statut`=:value WHERE 1');
 		$post -> bindParam(':title', $title, PDO::PARAM_STR);
 		$post -> bindParam(':content', $content, PDO::PARAM_STR);
 		$post -> execute();
@@ -48,9 +47,9 @@ class PostManager extends Manager
 		public function removePost()
 	{
 		$db = $this->dbConnect();
-		$post = $db->prepare('DELETE FROM `posts` WHERE 1');
-		$post -> execute();
-    	return $post;
+		$remove = $db->prepare('DELETE * FROM `posts` WHERE id= ?');
+		$remove -> execute();
+    	return $remove;
 	}
-	*/
+	
 }

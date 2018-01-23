@@ -16,17 +16,14 @@
 	    			<ul class="nav navbar-nav">
 	    				<li class="active col-md-2"><a href="index.php">Accueil</a></li>
 	    				<li class="col-md-2"><a href="view/frontend/bio.php">A propos de Jean</a></li>
-	    				<li class="col-md-2"><a href="contact.html">Contact</a></li>
-	    			</ul>
-	    			<form class="navbar-form pull-right col-md-2">
-	    				<input type="text" class="input-small" placeholder="Rechercher">
-	    				<button type="submit" class="btn btn-primary btn-xs">
-	    						<span class="glyphicon glyphicon-eye-open"></span>
-	    						Chercher</button>
-	    			</form>
-    		
+	    				<li class="col-md-2"><a href="view/frontend/contact.php">Contact</a></li>
+	    			</ul>    		
     		</nav>
     	</div>
         <?= $content ?>
     </body>
+    <footer>
+        <p>Copyright &copy;<?php echo strftime("%Y"); ?> - <small>Alison MELE</small></p>
+    </footer> 
+        
 </html>

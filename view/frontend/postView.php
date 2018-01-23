@@ -1,4 +1,4 @@
-<?php $title = htmlspecialchars($post['title']); ?>
+<?php $title = htmlspecialchars_decode($post['title']); ?>
 
 <?php ob_start(); ?>
 <h1>Billet simple pour l'Alaska !</h1>
@@ -6,12 +6,12 @@
 
 <div class="news">
     <h3>
-        <?= htmlspecialchars($post['title']) ?>
+        <?= htmlspecialchars_decode($post['title']) ?>
         <em>le <?= $post['creation_date_fr'] ?></em>
     </h3>
     
     <p>
-        <?= nl2br(htmlspecialchars($post['content'])) ?>
+        <?= nl2br(htmlspecialchars_decode($post['content'])) ?>
     </p>
 
 <h2>Commentaires</h2>
@@ -33,8 +33,8 @@
 while ($comment = $comments->fetch())
 {
 ?>
-    <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?>   
-    <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+    <p><strong><?= htmlspecialchars_decode($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?>   
+    <p><?= nl2br(htmlspecialchars_decode($comment['comment'])) ?></p>
     <form action="index.php?action=reportComment" method="post">
         <label for="pseudo">Votre nom : </label> <input type ="text" id="pseudo" name="pseudo" required />
         <input type="hidden" name="commentId" id="commentId" value="<?= $comment['id'] ?>" />

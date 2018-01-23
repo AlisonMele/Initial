@@ -1,3 +1,7 @@
+<?php
+session_start();
+session_destroy();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 <head>
@@ -60,12 +64,12 @@
 <body>
 	<h1>Billet simple pour l'aslaka !</h1>
 	<h2>Nouveau billet</h2>
-	<form name="formulaire" id="addPost" action="http://localhost/p3/index.php?action=addPost" method="post">
+	<form name="formulaire" id="addPost" action="/p3/index.php?action=addPost" method="post">
 		<label for="title">Titre de l'article</label>
 		<input type="text" name="title" id="title" />
 		<br />
 		<br />
-		<textarea id="content" name="content" rows="25" ></textarea>
+		<textarea id="content" name="content" rows="25"></textarea>
 		<br />
 		<br />
 		
@@ -75,6 +79,7 @@
     	</div>
     	<div class="button"><a href="http://localhost/p3/index.php?action=draftCopy"><input type="button" name="Brouillon"value="Brouillon"/></a>
     	</div>
+    	<a href="../../../p3/view/backend/deconnexion.php" target="_blank">Déconnexion</a>
 	</form>
 
 </body>

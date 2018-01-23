@@ -9,6 +9,7 @@ function listPosts() {
     $posts = $postManager->getPosts();
 
     require('view/frontend/listPostsView.php');
+
 }
 function post()
 {

@@ -13,12 +13,12 @@ while ($data = $posts->fetch())
 ?>
     <div class="container">
         <h3 class="col-md-6">
-            <?= htmlspecialchars($data['title']) ?>
+            <?= htmlspecialchars_decode($data['title']) ?>
             <em>le <?= $data['creation_date_fr'] ?></em>
         </h3>
         
         <p class="col-md-6">
-            <?= nl2br(htmlspecialchars($data['content'])) ?>
+            <?= nl2br(htmlspecialchars_decode($data['content'])) ?>
             <br />
             <em><a href='index.php?action=post&amp;id=<?= $data['id'] ?>'>Commentaires</a></em>
         </p>
