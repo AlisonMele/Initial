@@ -4,6 +4,12 @@ require_once("model/Manager.php");
 
 class CommentManager extends Manager
 {
+	public function getComment()
+	{
+		$db = $this->dbConnect();
+		$back = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
+		return $back;
+	}
 	public function getComments($postId)
 	{
 		$db = $this->dbConnect();
@@ -18,6 +24,14 @@ class CommentManager extends Manager
 		$affectedLines = $comments->execute(array($postId, $author, $comment));
 
 		return $affectedLines;
+	}
+	public function removeComment($id)
+	{
+		$db = $this->dbConnect();
+		$remove = $db->prepare('DELETE FROM `posts` WHERE id = ?');
+		$remove->execute(array($id));
+		
+    	return $remove;
 	}
 }
 

@@ -3,6 +3,9 @@ require_once('model/Manager.php');
 
 class ReportCommentmodel extends Manager
 {
+	private $pseudo;
+	private $commentId;
+
 	public function getReport($commentId)
 	{
 	
@@ -21,13 +24,13 @@ class ReportCommentmodel extends Manager
         $reportComment -> bindParam(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
         $reportComment-> bindParam(':commentId', $commentId, PDO::PARAM_STR);
 		$reportComment -> execute();
-    	return $reportComment -> fetch();
+    	return $reportComment;
 	}
-	public function listReport()
+	public function listReport($commentId)
 	{
 		$db = $this->dbConnect();
-		$listReport = $db->prepare('SELECT * FROM `reportcomments` HAVING COUNT (`comment_id`) > 9');
-		$listReport->execute();
-		return $listReport ->fetch();
+		$listReport = $db->prepare('SELECT `comment_id` FROM `reportcomments` GROUP BY `comment_id` HAVING COUNT(*) > 9');
+		$listReport->execute(array($commentId));
+		return $listReport;
 	}
 }

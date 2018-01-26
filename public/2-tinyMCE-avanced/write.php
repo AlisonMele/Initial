@@ -62,26 +62,33 @@ session_destroy();
 	</script>
 </head>
 <body>
+<div>
+	<?php
+	while ($data = $edit->fetch())
+	{
+	?>
 	<h1>Billet simple pour l'aslaka !</h1>
-	<h2>Nouveau billet</h2>
-	<form name="formulaire" id="addPost" action="/p3/index.php?action=addPost" method="post">
+	<h2>Modifier un article</h2>
+	<form name="formulaire" id="addPost" action="/p3/index.php?action=newPost&amp;id=<?= $data['id'] ?>" method="post">
 		<label for="title">Titre de l'article</label>
-		<input type="text" name="title" id="title" />
+		<input type="text" name="title" id="title" value="<?= $data['title'] ?>" />
 		<br />
 		<br />
-		<textarea id="content" name="content" rows="25"></textarea>
+		<textarea id="content" name="content" rows="25" value="<?= $data['content'] ?>"></textarea>
 		<br />
 		<br />
 		
 		<br />
 		<div class="button">
-        <input type="submit" value="Publier l'article" />
-    	</div>
-    	<div class="button"><a href="http://localhost/p3/index.php?action=draftCopy"><input type="button" name="Brouillon"value="Brouillon"/></a>
+        <input type="submit" value="Valider" />
     	</div>
     	<a href="../../../p3/view/backend/deconnexion.php" target="_blank">Déconnexion</a>
-    	<a href="../p3/index.php?action=getConnect" target="_blank">Retourner à la page administration sans enregistrer</a>
+    	<a href="../../p3/index.php?action=getConnect" target="_blank">Retourner à la page administration sans enregistrer</a>
 	</form>
-
+	<?php
+}
+$edit->closeCursor();
+?>
+</div>
 </body>
 </html>

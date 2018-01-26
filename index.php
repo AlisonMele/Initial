@@ -1,23 +1,56 @@
-    <head>
-        <meta charset="utf-8" />
-    </head>
 <?php 
 session_start();
-if(isset($_POST['pseudo']) AND !empty($_POST['pseudo'])) {
+/*if(!empty($_POST['pseudo'])) {
     $_SESSION['pseudo'] = $_POST['pseudo'];
 }
+else
+{
+    echo '<script>alert("Vous devez être connecté !");</script>';
+    require('index.php');
+}*/
 
-
-
-$cookiefin = time()+60*60*24;//Cookie valable 1 jour
-setcookie('pseudo', $_POST['pseudo'], $cookiefin);
+/*$cookiefin = time()+60*60*24;//Cookie valable 1 jour
+setcookie('pseudo', $_SESSION['pseudo'], $cookiefin);*/
 session_destroy();
 
 require_once('controler/frontend.php');
 require_once('controler/backend.php');
 
 if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'listReport') {
+        
+        listReport();
+    }
+    if ($_GET['action'] == 'listComments') {
+        if(isset($_POST['author']) && !empty($_POST['comment'])) {
+                listComments();
+         }
+        else {
+            echo 'erreur vérif routeur';
+        }
+    }
+    if ($_GET['action'] == 'removePost') {
+        removePost($_GET['id']);
+    }
 
+    if ($_GET['action'] == 'removeComment') {
+        removeComment($_GET['id']);
+    }
+    if ($_GET['action'] == 'getConnect') {
+
+            if(!empty($_POST['pseudo']) && !empty($_POST['password'])) {
+               getConnect($_POST['pseudo'], $_POST['password']);
+                //session_start();
+                /*$_SESSION['pseudo'] = $_POST['pseudo'];
+                $_SESSION['password'] = $_POST['password'];
+                $cookiefin = time()+60*60*24;//Cookie valable 1 jour
+                setcookie('pseudo', $_SESSION['pseudo'], $cookiefin);*/
+            }
+            else {
+                echo '<script>alert("Identifiant ou mot de passe manquant");</script>';
+                require('view/backend/connect.php');
+            }
+    }
     if ($_GET['action'] == 'addPost') {
         $content = htmlspecialchars($_POST['content'], ENT_QUOTES);
             if (!empty($_POST['title']) && !empty($_POST['content'])) {
@@ -27,17 +60,14 @@ if (isset($_GET['action'])) {
                 echo 'Erreur : tous les champs ne sont pas remplis !';
             }
     }
-    if ($_GET['action'] == 'removePost') {
-            if (!empty($_GET['title']) && !empty($_GET['content'])) {
-                removePost($_GET['title'], $_GET['content']);
-            }
-            else {
-                echo 'Erreur : tous les champs ne sont pas remplis !';
-            }
-    }
+
     if ($_GET['action'] == 'editPost') {
-            if (!empty($_GET['title']) && !empty($_GET['content'])) {
-                editPost($_GET['title'], $_GET['content']);
+                editPost($_GET['id']);
+    }
+    if ($_GET['action'] == 'newPost') {
+        $content = htmlspecialchars($_POST['content'], ENT_QUOTES);
+            if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                newPost($_POST['title'], $_POST['content']);
             }
             else {
                 echo 'Erreur : tous les champs ne sont pas remplis !';
@@ -52,26 +82,10 @@ if (isset($_GET['action'])) {
                 echo 'Erreur : tous les champs ne sont pas remplis !';
             }
     }
-    if ($_GET['action'] == 'getConnect') {
-
-
-            echo 'routeur';
-            if(!empty($_POST['pseudo']) && !empty($_POST['password'])) {
-               getConnect($_POST['pseudo'], $_POST['password']);
-               $_SESSION['Auth'] = array(
-                'pseudo' => $_POST['pseudo'],
-                'password' => $_POST['password']
-                );
-            }
-            else {
-                echo 'Identifiant ou mot de passe manquant';
-            }
-    }
-}
-if (isset($_GET['action'])) {
     if ($_GET['action'] == 'listPosts') {
         listPosts();
     }
+
     elseif ($_GET['action'] == 'post') {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             post();
@@ -106,7 +120,6 @@ if (isset($_GET['action'])) {
 else {
     listPosts();
 }
-
 /*if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listReport') {
             listReport();

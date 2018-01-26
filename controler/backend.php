@@ -1,32 +1,68 @@
 <?php
 require_once('model/frontend/PostManager.php');
 require_once('model/frontend/ReportComment.php');
+require_once('model/frontend/CommentManager.php');
 require_once('model/backend/ConnectManager.php');
-function listReport()
-{
-    $listReport = new ReportComment();
-    $listreport = $listReport->listReport();
 
-    require('view/backend/admin.php');
+function listComments() {
+    $commentManager = new PostManager();
+    $comments = $commentManager->getComments();
+
 }
 function getConnect()
 {
 	//echo 'controleur';
- 	$connect = new ConnectManager();
+	$commentManager = new CommentManager();
+	$comments = $commentManager->getComment();
 
+	$postManager = new PostManager();
+	$posts = $postManager->getPosts();
+
+ 	$connect = new ConnectManager();
  	$connexion = $connect->getConnect();
  	
  	//echo $connexion;
  	if($connexion == 1) {
- 	 	//echo "pseudo ok";
+ 		session_start();
+    	//echo 'Vous êtes connecté !';
  	   	require ('view/backend/admin.php');
  	
     	}
 	else{
-		echo 'Mauvais identifiant ou mot de passe';
-		require ('view/backend/connect.php');
+		echo '<script>alert("Mauvais identifiant ou mot de passe");</script>';
+		//exit();
+		require('view/backend/connect.php');
 		}
 }
+
+/*function backlistPosts() {
+    $postManager = new PostManager();
+    $posts = $postManager->getPosts();
+}
+function backPost()
+{
+    $postManager = new PostManager();
+    $post = $postManager->getPost($_GET['id']);
+  
+}*/
+function listReport()
+{
+    $listReport = new ReportCommentmodel();
+    //$listReport = new PostManager();
+    $comments = $commentManager->getComments($id);
+    $listreport = $listReport->listReport();
+
+    if($id == $commentId) {
+		echo $listreport;
+    }
+
+    else {
+    	echo('Aucun commentaire signalé !');
+    }
+    require('view/backend/signalement.php');
+}
+
+
 function addPost($title, $content)
 {
 
@@ -38,10 +74,11 @@ function addPost($title, $content)
 		throw new Exception('Impossible d\'ajouter l`\'article');
 	}
 		else {
+			echo 'L\'article a été ajouté';			
 			require('view/backend/admin.php');
 		}
 }
-function draftCopy($title, $content)
+/*function draftCopy($title, $content)
 {
 	echo 'controleur';
 	$draftCopy = new PostManager();
@@ -54,32 +91,68 @@ function draftCopy($title, $content)
 		else {
 			require('view/backend/admin.php');
 		}
-}
-function editPost($title, $content)
+}*/
+function editPost($postId)
 {
-	echo 'controleur';
-	$editPost = new PostManager();
+	//echo 'controleur';
 
-	$post = $editPost->editPost($title, $content);
+	$edit_post = new PostManager();
 
-	if ($post === false) {
-		throw new Exception('Impossible d\'afficher l`\'article');
+	$edit = $edit_post->editPost($_GET['id']);
+
+	if($edit->rowCount() == 1) {
+		require('public/2-tinyMCE-avanced/write.php');
+
+	} else {
+		die('Erreur : l\'article concerné n\'existe pas !');
 	}
-		else {
-			require('public/2-tinyMCE-avanced/edit.php');
-		}
 }
-function removePost($title, $content)
+function newPost($title, $content)
 {
-	echo 'controleur';
-	$removePost = new PostManager();
 
-	$remove = $removePost->removePost($title, $content);
+	$newPost = new PostManager();
 
-	if ($remove === false) {
+	$savePost = $newPost->newPost($title, $content);
+
+	if ($savePost === false) {
 		throw new Exception('Impossible d\'ajouter l`\'article');
 	}
 		else {
-			require('view/backend/admin.php');
+			echo 'L\'article a été ajouté';			
+			
+			//require('localhost/p3/index.php?action=getConnect');
+		}
+}
+
+function removePost($postId)
+{
+	//echo 'controleur';
+	$removePost = new PostManager();
+	$remove = $removePost->removePost($_GET['id']);
+
+	if ($remove === false) {
+		echo '<script>alert("L\'article n\a pas été supprimé");</script>';	
+	
+	}
+		else {
+
+			echo '<script>alert("L\article a été supprimé");</script>';
+
+		}
+}
+function removeComment($id)
+{
+	//echo 'controleur';
+	$removeComment = new CommentManager();
+	$remove = $removeComment->removeComment($_GET['id']);
+
+	if ($remove === false) {
+		echo '<script>alert("Le commentaire n\a pas été supprimé");</script>';	
+	
+	}
+		else {
+
+			echo '<script>alert("Le commentaire a été supprimé");</script>';
+
 		}
 }

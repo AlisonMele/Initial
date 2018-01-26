@@ -5,7 +5,6 @@
 <img src="public/alaska.jpg" alt="" class="img-responsive" />
 <h1 class="col-md-12">Billet simple pour l'Alaska!</h1>
 <h2 class="col-md-12">Les derniers billets</h2>
-
 </div>
 <?php
 while ($data = $posts->fetch())

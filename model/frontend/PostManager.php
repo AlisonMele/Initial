@@ -4,6 +4,10 @@ require("model/Manager.php");
 
 class PostManager extends Manager
 {
+
+	private $title;
+	private $content;
+
 	public function getPosts()
 	{
 		$db = $this->dbConnect();
@@ -27,29 +31,42 @@ class PostManager extends Manager
 
 		return $affectedLines;
 	}
-		public function draftCopy($title, $content)
+		/*public function draftCopy($title, $content)
 	{
 		$db = $this->dbConnect();
 		$post = $db->prepare('INSERT INTO `posts`(`title`, `content`, `creation_date`) VALUES (?, ?, NOW())');
 		$affectedLines = $post->execute(array($title, $content));
 
 		return $affectedLines;
-	}
-		public function editPost()
+	}*/
+		public function editPost($postId)
 	{
 		$db = $this->dbConnect();
-		$post = $db->prepare('UPDATE `posts` SET `title`=:title,`content`=:content,`creation_date`=NOW(),`statut`=:value WHERE 1');
-		$post -> bindParam(':title', $title, PDO::PARAM_STR);
-		$post -> bindParam(':content', $content, PDO::PARAM_STR);
-		$post -> execute();
-    	return $post -> fetch();
+		$edit_post = $db->prepare('SELECT * FROM`posts`WHERE id = ?');
+		$edit_post -> execute(array($_GET['id']));
+
+		//$edit_post = $edit_post->fetch();
+		return $edit_post;
 	}
-		public function removePost()
+	public function newPost($title, $content)
 	{
 		$db = $this->dbConnect();
-		$remove = $db->prepare('DELETE * FROM `posts` WHERE id= ?');
-		$remove -> execute();
+		$newPost = $db->prepare('UPDATE`posts`SET `title`, `content` WHERE id = ?');
+		$newPost -> bindParam(':title', $_POST['title'], PDO::PARAM_STR);
+        $newPost-> bindParam(':content', $_POST['content'], PDO::PARAM_STR);
+		$savePost = $newPost -> execute($title, $content);
+		
+		return $savePost;
+
+	}
+
+	
+		public function removePost($postId)
+	{
+		$db = $this->dbConnect();
+		$remove = $db->prepare('DELETE FROM `posts` WHERE id = ?');
+		$remove->execute(array($postId));
+		
     	return $remove;
 	}
-	
 }
