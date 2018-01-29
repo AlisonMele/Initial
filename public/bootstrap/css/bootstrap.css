@@ -182,10 +182,19 @@ optgroup {
 table {
   border-spacing: 0;
   border-collapse: collapse;
+   border-width:1px; 
+   border-style:solid; 
+   border-color:black;
+   width:50%;
+ }
 }
 td,
 th {
   padding: 0;
+   border-width:1px;
+ border-style:solid; 
+ border-color:red;
+ width:50%;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {

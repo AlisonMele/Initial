@@ -8,22 +8,11 @@
     </head>
         
     <body>
-        <div class="container">
-            <nav class="navbar navbar-default">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.php">Billet simple pour l'Alaska</a>
-                </div>
-                    <ul class="nav navbar-nav">
-                        <li class="active col-md"><a href="index.php">Accueil</a></li>
-                        <li class="col-md"><a href="view/frontend/bio.php">A propos de Jean</a></li>
-                        <li class="col-md"><a href="view/frontend/contact.php">Contact</a></li>
-                    </ul>           
-            </nav>
-        </div>
         <?= $content ?>
     </body>
     <footer>
-        <p>Copyright &copy;<?php echo strftime("%Y"); ?> - <small>Alison MELE</small></p>
+        <p class="col-md-12">Copyright &copy;<?php echo strftime("%Y"); ?> - <small>Alison MELE</small></p>
+
     </footer> 
         
 </html>

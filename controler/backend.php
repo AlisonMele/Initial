@@ -4,11 +4,6 @@ require_once('model/frontend/ReportComment.php');
 require_once('model/frontend/CommentManager.php');
 require_once('model/backend/ConnectManager.php');
 
-function listComments() {
-    $commentManager = new PostManager();
-    $comments = $commentManager->getComments();
-
-}
 function getConnect()
 {
 	//echo 'controleur';
@@ -47,19 +42,23 @@ function backPost()
 }*/
 function listReport()
 {
+	echo 'controler';
     $listReport = new ReportCommentmodel();
-    //$listReport = new PostManager();
-    $comments = $commentManager->getComments($id);
-    $listreport = $listReport->listReport();
+    $listreport = $listReport->listReport($commentId);
+    $listComment = new ReportCommentmodel();
+    $listcomment = $listComment->listComment($commentId);
+    $commentManager = new CommentManager();
+    $comments = $commentManager->getComment();
 
-    if($id == $commentId) {
-		echo $listreport;
+    if($listcomment == $listreport) {
+		require('view/backend/signalement.php');
     }
-
     else {
-    	echo('Aucun commentaire signalé !');
+    	echo '<script>alert("Aucun commentaire signalé");</script>';
+    	// RESTER SUR LA PAGE require('view/backend/admin.php');
+    	
     }
-    require('view/backend/signalement.php');
+
 }
 
 

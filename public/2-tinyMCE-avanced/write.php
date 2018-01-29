@@ -74,7 +74,7 @@ session_destroy();
 		<input type="text" name="title" id="title" value="<?= $data['title'] ?>" />
 		<br />
 		<br />
-		<textarea id="content" name="content" rows="25" value="<?= $data['content'] ?>"></textarea>
+		<textarea id="content" name="content" rows="25"><?= htmlspecialchars_decode($data['content']) ?></textarea>
 		<br />
 		<br />
 		

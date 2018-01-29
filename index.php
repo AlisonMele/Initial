@@ -18,7 +18,7 @@ require_once('controler/backend.php');
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'listReport') {
-        
+        echo 'routeur';        
         listReport();
     }
     if ($_GET['action'] == 'listComments') {
@@ -38,6 +38,7 @@ if (isset($_GET['action'])) {
     }
     if ($_GET['action'] == 'getConnect') {
 
+            $_POST['password'] = md5($_POST['password']);
             if(!empty($_POST['pseudo']) && !empty($_POST['password'])) {
                getConnect($_POST['pseudo'], $_POST['password']);
                 //session_start();

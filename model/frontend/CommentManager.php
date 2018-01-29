@@ -7,7 +7,7 @@ class CommentManager extends Manager
 	public function getComment()
 	{
 		$db = $this->dbConnect();
-		$back = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
+		$back = $db->query('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM comments WHERE action = 0 ORDER BY comment_date DESC');
 		return $back;
 	}
 	public function getComments($postId)
@@ -28,7 +28,7 @@ class CommentManager extends Manager
 	public function removeComment($id)
 	{
 		$db = $this->dbConnect();
-		$remove = $db->prepare('DELETE FROM `posts` WHERE id = ?');
+		$remove = $db->prepare('UPDATE `comments` SET `action`= 1 WHERE id= ?');
 		$remove->execute(array($id));
 		
     	return $remove;

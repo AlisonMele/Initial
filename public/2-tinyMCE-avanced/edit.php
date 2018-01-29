@@ -82,6 +82,5 @@ session_destroy();
     	<a href="../../../p3/view/backend/deconnexion.php" target="_blank">Déconnexion</a>
     	<a href="../p3/index.php?action=getConnect" target="_blank">Retourner à la page administration sans enregistrer</a>
 	</form>
-
 </body>
 </html>
