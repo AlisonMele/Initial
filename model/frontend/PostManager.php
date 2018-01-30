@@ -43,7 +43,7 @@ class PostManager extends Manager
 	{
 		$db = $this->dbConnect();
 		$edit_post = $db->prepare('SELECT * FROM`posts`WHERE id = ?');
-		$edit_post -> execute(array($_GET['id']));
+		$edit_post -> execute(array($postId));
 
 		//$edit_post = $edit_post->fetch();
 		return $edit_post;
@@ -51,16 +51,14 @@ class PostManager extends Manager
 	public function newPost($title, $content)
 	{
 		$db = $this->dbConnect();
-		$newPost = $db->prepare('UPDATE`posts`SET `title`, `content` WHERE id = ?');
+		$newPost = $db->prepare('UPDATE`posts`SET `title` =:title, `content` =:content WHERE id = "58"');
+		//$savePost = $newPost->execute(array($title, htmlspecialchars($content)));	
 		$newPost -> bindParam(':title', $_POST['title'], PDO::PARAM_STR);
-        $newPost-> bindParam(':content', $_POST['content'], PDO::PARAM_STR);
-		$savePost = $newPost -> execute($title, $content);
-		
-		return $savePost;
+        $newPost -> bindParam(':content', $_POST['content'], PDO::PARAM_STR);
+		$newPost -> execute();
+		return $newPost;
 
 	}
-
-	
 		public function removePost($postId)
 	{
 		$db = $this->dbConnect();

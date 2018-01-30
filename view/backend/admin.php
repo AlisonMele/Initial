@@ -11,9 +11,9 @@
                     <a class="navbar-brand">Bienvenue dans l'espace administrateur</a>
                 </div>
                     <ul class="nav navbar-nav">
-                        <li class="active col-md"><a href="public/2-tinyMCE-avanced/edit.php">Ecrire un nouvel article</a></li>
-                        <li class="col-md"><a href="index.php?action=listReport">Modérer les commentaires</a></li>
-                        <li class="col-md"><a href="view/backend/deconnexion.php">Se déconnecter</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="public/2-tinyMCE-avanced/edit.php">Ecrire un nouvel article</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="index.php?action=listReport">Modérer les commentaires</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="view/backend/deconnexion.php">Se déconnecter</a></li>
                     </ul>           
             </nav>
 </div>

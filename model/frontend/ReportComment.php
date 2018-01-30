@@ -25,11 +25,11 @@ class ReportCommentmodel extends Manager
 		$reportComment -> execute();
     	return $reportComment;
 	}
-	public function listReport($commentId)
+	public function listReport($id)
 	{
 		$db = $this->dbConnect();
 		$listReport = $db->prepare('SELECT `comment_id` FROM `reportcomments` GROUP BY `comment_id` HAVING COUNT(*) > 2');
-		$listReport->execute(array($commentId));
+		$listReport->execute(array($id));
 		$listreport = $listReport->fetch();
 		return $listreport;
 	}
@@ -43,6 +43,16 @@ class ReportCommentmodel extends Manager
 
 		return $listcomment;
 	}
+	public function startReport($commentId)
+	{
+		$db = $this->dbConnect();
+		$startReport = $db->prepare('UPDATE `reportcomments` SET `traitement`= 1 WHERE id = comment_id'); 
+		$startreport=$startReport->execute(array($commentId));
+
+
+		return $startreport;
+	}
+
 }
 
 //SELECT `id` FROM `comments` WHERE EXISTS ( SELECT `comment_id` FROM `reportcomments` GROUP BY `comment_id` HAVING COUNT(*) > 2 )

@@ -21,9 +21,10 @@ if (isset($_GET['action'])) {
         echo 'routeur';        
         listReport();
     }
+
     if ($_GET['action'] == 'listComments') {
         if(isset($_POST['author']) && !empty($_POST['comment'])) {
-                listComments();
+                listComments($_GET['author'], $_GET['comment']);
          }
         else {
             echo 'erreur vérif routeur';
@@ -35,6 +36,15 @@ if (isset($_GET['action'])) {
 
     if ($_GET['action'] == 'removeComment') {
         removeComment($_GET['id']);
+    }
+    if ($_GET['action'] == 'keepComment') {
+        if(isset($_GET['id'])){
+        echo 'routeur';        
+        keepComment($_GET['id']);
+        }
+        else {
+            echo 'Aucun identifiant';
+        }
     }
     if ($_GET['action'] == 'getConnect') {
 

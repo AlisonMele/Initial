@@ -50,7 +50,7 @@ function listReport()
     $commentManager = new CommentManager();
     $comments = $commentManager->getComment();
 
-    if($listcomment == $listreport) {
+    if($listcomment == $listcomment) {
 		require('view/backend/signalement.php');
     }
     else {
@@ -110,10 +110,9 @@ function newPost($title, $content)
 {
 
 	$newPost = new PostManager();
+	$savepost = $newPost->newPost($title, $content);
 
-	$savePost = $newPost->newPost($title, $content);
-
-	if ($savePost === false) {
+	if ($savepost === false) {
 		throw new Exception('Impossible d\'ajouter l`\'article');
 	}
 		else {
@@ -141,9 +140,12 @@ function removePost($postId)
 }
 function removeComment($id)
 {
-	//echo 'controleur';
+	echo 'controleur';
 	$removeComment = new CommentManager();
 	$remove = $removeComment->removeComment($_GET['id']);
+
+	$startReport = new ReportCommentmodel();
+	$start = $startReport->startReport($_GET['id']);
 
 	if ($remove === false) {
 		echo '<script>alert("Le commentaire n\a pas été supprimé");</script>';	
@@ -152,6 +154,25 @@ function removeComment($id)
 		else {
 
 			echo '<script>alert("Le commentaire a été supprimé");</script>';
+
+		}
+}
+function keepComment($id)
+{
+	echo 'controleur';
+	$keepComment = new CommentManager();
+	$keep = $keepComment->keepComment($_GET['id']);
+
+	$startReport = new ReportCommentmodel();
+	$start = $startReport->startReport($_GET['id']);
+
+	if ($keep === false) {
+		echo '<script>alert("Le commentaire n\a pas été validé");</script>';	
+	
+	}
+		else {
+
+			echo '<script>alert("Le commentaire a été conservé");</script>';
 
 		}
 }
