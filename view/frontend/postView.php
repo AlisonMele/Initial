@@ -47,11 +47,8 @@
     ?>
         <p><strong><?= htmlspecialchars_decode($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?>   
         <p><?= nl2br(htmlspecialchars_decode($comment['comment'])) ?></p>
-        <form action="index.php?action=reportComment" method="post">
-            <label for="pseudo">Votre nom : </label> <input type ="text" id="pseudo" name="pseudo" required />
-            <input type="hidden" name="commentId" id="commentId" value="<?= $comment['id'] ?>" />
-            <input type="submit" name="reportcomments" value="Signaler le commentaire" /></p>
-        </form>
+        <a href="index.php?action=reportComment&amp;id=<?= $comment['id'] ?>">Signaler le commentaire</a>
+
     <?php 
     }
     ?>

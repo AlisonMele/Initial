@@ -7,9 +7,9 @@
 <body>
 <?php ob_start(); ?>
  <h1>Billet simple pour Alaska!</h1>
-        <h2>Les derniers billets</h2>
-
-            <p>Veuillez entrer l'identifiant et le mot de passe :</p>
+        <h2>Accès à l'espace administrateur</h2>
+            <p>Cette page est réservée à l'administrateur du site internet<br />
+            Veuillez entrer l'identifiant et le mot de passe :</p>
                 <form action="../../index.php?action=getConnect" method="POST">
                 <p>
                     <label for="pseudo">Identifiant</label><input type="pseudo" name="pseudo" required />
@@ -19,7 +19,7 @@
                 </form>
             <a href="../../index.php">Retour au site internet</a>
 
-            <p>Cette page est réservée à l'administrateur du site internet</p>
+
 </body>
 <?php $content = ob_get_clean(); ?>
 

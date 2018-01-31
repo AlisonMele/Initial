@@ -17,19 +17,19 @@ require_once('controler/frontend.php');
 require_once('controler/backend.php');
 
 if (isset($_GET['action'])) {
-    if ($_GET['action'] == 'listReport') {
+    if ($_GET['action'] == 'getReport') {
         echo 'routeur';        
-        listReport();
+        getReport();
     }
 
-    if ($_GET['action'] == 'listComments') {
+   /* if ($_GET['action'] == 'listComments') {
         if(isset($_POST['author']) && !empty($_POST['comment'])) {
                 listComments($_GET['author'], $_GET['comment']);
          }
         else {
             echo 'erreur vérif routeur';
         }
-    }
+    }*/
     if ($_GET['action'] == 'removePost') {
         removePost($_GET['id']);
     }
@@ -119,18 +119,15 @@ if (isset($_GET['action'])) {
             echo 'Erreur : aucun identifiant de billet envoyé';
         }
     }
-    if ($_GET['action'] == 'reportComment'){
-        if (!empty($_POST['pseudo']) && !empty($_POST['commentId'])) {
-                reportComment($_POST['pseudo'], $_POST['commentId']);
-            }
-        else {
-            echo 'Erreur : tous les champs ne sont pas remplis !';
-            }
+    if ($_GET['action'] == 'reportComment') {
+
+            reportComment();      
         }
 }
 else {
     listPosts();
 }
+
 /*if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listReport') {
             listReport();

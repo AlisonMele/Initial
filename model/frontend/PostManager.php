@@ -51,7 +51,7 @@ class PostManager extends Manager
 	public function newPost($title, $content)
 	{
 		$db = $this->dbConnect();
-		$newPost = $db->prepare('UPDATE`posts`SET `title` =:title, `content` =:content WHERE id = "58"');
+		$newPost = $db->prepare('UPDATE`posts`SET `title` =:title, `content` =:content WHERE id = ?');
 		//$savePost = $newPost->execute(array($title, htmlspecialchars($content)));	
 		$newPost -> bindParam(':title', $_POST['title'], PDO::PARAM_STR);
         $newPost -> bindParam(':content', $_POST['content'], PDO::PARAM_STR);

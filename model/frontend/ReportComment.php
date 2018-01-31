@@ -5,7 +5,7 @@ class ReportCommentmodel extends Manager
 {
 
 
-	public function getReport($commentId)
+	/*public function getReport($commentId)
 	{
 	
 		$db = $this->dbConnect();
@@ -15,8 +15,18 @@ class ReportCommentmodel extends Manager
 
         return $reportComment->fetchObject('\Manager\ReportComment', array($commentId));
       
+	}*/
+		public function getReport()
+	{
+	
+		$db = $this->dbConnect();
+		$reportComment = $db->query('SELECT `id`, `post_id`, `author`, `comment`, `comment_date` FROM comments WHERE action >= 9');
+        $reportComment -> execute();
+     
+        return $reportComment;
+      
 	}
-	public function reportComment($peudo, $commentId)
+	/*public function reportComment($peudo, $commentId)
 	{
 		$db = $this->dbConnect();
 		$reportComment = $db->prepare('INSERT INTO reportcomments(pseudo, comment_id, report_date) VALUES (:pseudo, :commentId, NOW())');
@@ -43,7 +53,7 @@ class ReportCommentmodel extends Manager
 
 		return $listcomment;
 	}
-	public function startReport($commentId)
+	/*public function startReport($commentId)
 	{
 		$db = $this->dbConnect();
 		$startReport = $db->prepare('UPDATE `reportcomments` SET `traitement`= 1 WHERE id = comment_id'); 
@@ -51,8 +61,16 @@ class ReportCommentmodel extends Manager
 
 
 		return $startreport;
-	}
+	}*/
+	public function startReport($commentId)
+	{
+		$db = $this->dbConnect();
+		$startReport = $db->prepare('UPDATE `comments` SET `action`= 0 WHERE id = ?'); 
+		$startreport=$startReport->execute(array($commentId));
 
+
+		return $startreport;
+	}
 }
 
 //SELECT `id` FROM `comments` WHERE EXISTS ( SELECT `comment_id` FROM `reportcomments` GROUP BY `comment_id` HAVING COUNT(*) > 2 )

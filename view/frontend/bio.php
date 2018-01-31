@@ -19,11 +19,11 @@
 		<h2 class="col-md-12">Biographie</h2>
 </div>
 			<div class="container">
-			<img class="col-md-4" src="jean.jpg" alt="" class="img-responsive" />
+			<img class="col-xs-2 col-md-4" src="jean.jpg" alt="" class="img-responsive" />
 			<p class="col-md-4">Jean Forteroche est un écrivain français renommé dans le monde grâce à de multiples nouvelles publiées depuis plus de 20 ans. Aujourd'hui, il se lance dans un nouveau projet pour toucher un public plus large. Par ce blog, son objectif est de communiquer avec ses lecteurs et de leur faire découvrir l'histoire au fur et à mesure de son écriture</p>
-			<p class="col-md-4">Une question ? Vous pouvez me joindre sur l'adresse mail suivante : alaska@gmail.com</p>
+			<p class="col-md-12">Une question ? Vous pouvez me joindre sur l'adresse mail suivante : alaska@gmail.com</p>
 			</div>
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('C:/wamp/www/p3/view/template.php'); ?>
+<?php require('../template.php'); ?>

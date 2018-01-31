@@ -28,18 +28,18 @@
 			<td class="col-xs-4"><strong>Action</strong></td>
 		</tr><br />
 <?php
-while ($comment = $comments->fetch())
+while ($signalement = $reports->fetch())
 {
 ?>
 		<tr>
-			<td class="col-md-4"><?= htmlspecialchars_decode($comment['author']) ?></td>
-			<td class="col-md-4"><?= nl2br(htmlspecialchars_decode($comment['comment'])) ?></td>
-			<td><a href="index.php?action=removeComment&amp;id=<?= $comment['id'] ?>">Supprimer</a> - <a href="index.php?action=keepComment&amp;id=<?= $comment['id'] ?>">Valider</a></td>
+			<td class="col-md-4"><?= htmlspecialchars_decode($signalement['author']) ?></td>
+			<td class="col-md-4"><?= nl2br(htmlspecialchars_decode($signalement['comment'])) ?></td>
+			<td><a href="index.php?action=removeComment&amp;id=<?= $signalement['id'] ?>">Supprimer</a> - <a href="index.php?action=keepComment&amp;id=<?= $signalement['id'] ?>">Valider</a></td>
 		</tr>
 	
 <?php 
 }
-$comments->closeCursor();
+$reports->closeCursor();
 ?>
 </table>
 

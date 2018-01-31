@@ -80,7 +80,7 @@ session_destroy();
     	<div class="button"><a href="http://localhost/p3/index.php?action=draftCopy"><input type="button" name="Brouillon"value="Brouillon"/></a>
     	</div>
     	<a href="../../../p3/view/backend/deconnexion.php" target="_blank">Déconnexion</a>
-    	<a href="../p3/index.php?action=getConnect" target="_blank">Retourner à la page administration sans enregistrer</a>
+    	<a href="../../index.php?action=getConnect" target="_blank">Retourner à la page administration sans enregistrer</a>
 	</form>
 </body>
 </html>

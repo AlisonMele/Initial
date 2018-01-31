@@ -40,24 +40,23 @@ function backPost()
     $post = $postManager->getPost($_GET['id']);
   
 }*/
-function listReport()
+function getReport()
 {
 	echo 'controler';
-    $listReport = new ReportCommentmodel();
+    /*$listReport = new ReportCommentmodel();
     $listreport = $listReport->listReport($commentId);
     $listComment = new ReportCommentmodel();
-    $listcomment = $listComment->listComment($commentId);
-    $commentManager = new CommentManager();
-    $comments = $commentManager->getComment();
+    $listcomment = $listComment->listComment($commentId);*/
+    $reportcomment = new ReportCommentmodel();
+    $reports = $reportcomment->getReport();
 
-    if($listcomment == $listcomment) {
-		require('view/backend/signalement.php');
-    }
-    else {
+    require('view/backend/signalement.php');
+   
+   /* else {
     	echo '<script>alert("Aucun commentaire signalé");</script>';
     	// RESTER SUR LA PAGE require('view/backend/admin.php');
     	
-    }
+    }*/
 
 }
 
@@ -117,8 +116,7 @@ function newPost($title, $content)
 	}
 		else {
 			echo 'L\'article a été ajouté';			
-			
-			//require('localhost/p3/index.php?action=getConnect');
+
 		}
 }
 
@@ -144,8 +142,6 @@ function removeComment($id)
 	$removeComment = new CommentManager();
 	$remove = $removeComment->removeComment($_GET['id']);
 
-	$startReport = new ReportCommentmodel();
-	$start = $startReport->startReport($_GET['id']);
 
 	if ($remove === false) {
 		echo '<script>alert("Le commentaire n\a pas été supprimé");</script>';	

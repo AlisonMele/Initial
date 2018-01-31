@@ -12,11 +12,12 @@
                 </div>
                     <ul class="nav navbar-nav">
                         <li class="col-xs-12 col-md-4"><a href="public/2-tinyMCE-avanced/edit.php">Ecrire un nouvel article</a></li>
-                        <li class="col-xs-12 col-md-4"><a href="index.php?action=listReport">Modérer les commentaires</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="index.php?action=getReport">Modérer les commentaires</a></li>
                         <li class="col-xs-12 col-md-4"><a href="view/backend/deconnexion.php">Se déconnecter</a></li>
                     </ul>           
             </nav>
 </div>
+
 <div class="container">
 <h1>Billet simple pour l'Alaska !</h1>
 

@@ -2,7 +2,7 @@
 
 require_once('model/frontend/PostManager.php');
 require_once('model/frontend/CommentManager.php');
-require_once('model/frontend/ReportComment.php');
+
 
 function listPosts() {
     $postManager = new PostManager();
@@ -34,9 +34,17 @@ function addComment($postId, $author, $comment)
         header('Location: index.php?action=post&id=' . $postId);
     }
 }
-function reportComment($pseudo, $commentId)
+function reportComment()
 {
-    $reportComment = new ReportCommentmodel();
-    $reportComment = $reportComment->reportComment($pseudo, $commentId);
-    require('view/frontend/reportView.php');
+    echo 'controler';
+    $report = new CommentManager();
+    $reportcomment = $report->reportComment($_GET['id']);  
+
+    if($reportcomment === false) {
+        echo 'Le commentaire n\a pas été signalé !';
+    }
+    else {
+        require('view/frontend/reportView.php');
+    }
+    
 }
