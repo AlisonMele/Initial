@@ -8,7 +8,7 @@ function listPosts() {
     $postManager = new PostManager();
     $posts = $postManager->getPosts();
 
-    require('view/frontend/listPostsView.php');
+    require('./view/frontend/listPostsView.php');
 
 }
 function post()
@@ -19,7 +19,7 @@ function post()
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
 
-    require('view/frontend/postView.php');
+    require('./view/frontend/postView.php');
 }
 function addComment($postId, $author, $comment)
 {
@@ -38,13 +38,16 @@ function reportComment()
 {
     echo 'controler';
     $report = new CommentManager();
-    $reportcomment = $report->reportComment($_GET['id']);  
-
+    $reportcomment = $report->reportComment($_GET['id']); 
+    for ($action = 0; $action = 0; $action++)
+    {
+        include('model/frontend/CommentManager.php');
+    }
     if($reportcomment === false) {
         echo 'Le commentaire n\a pas été signalé !';
     }
     else {
-        require('view/frontend/reportView.php');
+        require('./view/frontend/reportView.php');
     }
     
 }

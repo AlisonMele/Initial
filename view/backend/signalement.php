@@ -1,7 +1,11 @@
+<?php
+session_start();
+session_destroy();
+?>
 <html>
 <?php $title = htmlspecialchars_decode('Billet simple pour l\'Alaska'); ?>
 <head>
-	<meta charset="utf-8">
+	<meta charset="utf8">
 </head>
 <body>
 <?php ob_start(); ?>
@@ -12,13 +16,14 @@
                 </div>
                     <ul class="nav navbar-nav">
                         <li class="col-xs-12 col-md-4"><a href="public/2-tinyMCE-avanced/edit.php">Ecrire un nouvel article</a></li>
-                        <li class="col-xs-12 col-md-4"><a href="view/backend/signalement.php">Modérer les commentaires</a></li>
-                        <li class="col-xs-12 col-md-4"><a href="view/backend/deconnexion.php">Se déconnecter</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="index.php?action=getReport">Modérer les commentaires</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="./connect.php">Se déconnecter</a></li>
                     </ul>           
             </nav>
 
 
 <h1>Billet simple pour l'Alaska !</h1>
+<a href="index.php?action=getConnect">Retour à la page principale</a>
 
 <h3>Liste des commentaires signalés</h3>
 <table>
@@ -42,10 +47,6 @@ while ($signalement = $reports->fetch())
 $reports->closeCursor();
 ?>
 </table>
-
-<a href="view/backend/deconnexion.php" target="_blank">Déconnexion</a>
-<a href="view/backend/admin.php" target="_blank">Retour à la page d'accueil</a>
-
 </body>
 <?php $content = ob_get_clean(); ?>
 </div>

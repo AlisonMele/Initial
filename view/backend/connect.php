@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="../public/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
 <?php ob_start(); ?>

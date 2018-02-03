@@ -1,12 +1,12 @@
 <?php
 require_once('model/frontend/PostManager.php');
 require_once('model/frontend/ReportComment.php');
-require_once('model/frontend/CommentManager.php');
-require_once('model/backend/ConnectManager.php');
+require_once('/model/frontend/CommentManager.php');
+require_once('/model/backend/ConnectManager.php');
 
 function getConnect()
 {
-	//echo 'controleur';
+	
 	$commentManager = new CommentManager();
 	$comments = $commentManager->getComment();
 
@@ -16,48 +16,28 @@ function getConnect()
  	$connect = new ConnectManager();
  	$connexion = $connect->getConnect();
  	
- 	//echo $connexion;
+ 	
  	if($connexion == 1) {
  		session_start();
-    	//echo 'Vous êtes connecté !';
- 	   	require ('view/backend/admin.php');
- 	
-    	}
+    		require ('view/backend/admin.php');
+		}
+       	
 	else{
-		echo '<script>alert("Mauvais identifiant ou mot de passe");</script>';
-		//exit();
-		require('view/backend/connect.php');
+			echo '<script>alert("Mauvais identifiant ou mot de passe");</script>';
+			
+			require('../backend/connect.php');
 		}
 }
 
-/*function backlistPosts() {
-    $postManager = new PostManager();
-    $posts = $postManager->getPosts();
-}
-function backPost()
-{
-    $postManager = new PostManager();
-    $post = $postManager->getPost($_GET['id']);
-  
-}*/
+
 function getReport()
 {
 	echo 'controler';
-    /*$listReport = new ReportCommentmodel();
-    $listreport = $listReport->listReport($commentId);
-    $listComment = new ReportCommentmodel();
-    $listcomment = $listComment->listComment($commentId);*/
     $reportcomment = new ReportCommentmodel();
     $reports = $reportcomment->getReport();
 
     require('view/backend/signalement.php');
-   
-   /* else {
-    	echo '<script>alert("Aucun commentaire signalé");</script>';
-    	// RESTER SUR LA PAGE require('view/backend/admin.php');
-    	
-    }*/
-
+ 
 }
 
 
@@ -73,58 +53,46 @@ function addPost($title, $content)
 	}
 		else {
 			echo 'L\'article a été ajouté';			
-			require('view/backend/admin.php');
+			require('./view/backend/confirmation.php');
 		}
 }
-/*function draftCopy($title, $content)
-{
-	echo 'controleur';
-	$draftCopy = new PostManager();
-
-	$affectedLines = $draftCopy->draftCopy($title, $content);
-
-	if ($affectedLines === false) {
-		throw new Exception('Impossible d\'enregistrer le brouillon');
-	}
-		else {
-			require('view/backend/admin.php');
-		}
-}*/
 function editPost($postId)
 {
-	//echo 'controleur';
+	
 
 	$edit_post = new PostManager();
 
 	$edit = $edit_post->editPost($_GET['id']);
 
 	if($edit->rowCount() == 1) {
-		require('public/2-tinyMCE-avanced/write.php');
+		require('./public/2-tinyMCE-avanced/write.php');
 
 	} else {
 		die('Erreur : l\'article concerné n\'existe pas !');
 	}
 }
-function newPost($title, $content)
+function newPost($id, $title, $content)
 {
 
-	$newPost = new PostManager();
-	$savepost = $newPost->newPost($title, $content);
+	$newpost = new PostManager();
+	$savepost = $newpost->newPost($title, $content, $id);
 
 	if ($savepost === false) {
 		throw new Exception('Impossible d\'ajouter l`\'article');
 	}
 		else {
-			echo 'L\'article a été ajouté';			
+
+			require('./view/backend/confirmation.php');
+			echo 'L\'article a été modifié';
 
 		}
 }
 
 function removePost($postId)
 {
-	//echo 'controleur';
+	
 	$removePost = new PostManager();
-	$remove = $removePost->removePost($_GET['id']);
+	$remove = $removePost->removePost($id, $title, $content);
 
 	if ($remove === false) {
 		echo '<script>alert("L\'article n\a pas été supprimé");</script>';	
@@ -132,13 +100,13 @@ function removePost($postId)
 	}
 		else {
 
-			echo '<script>alert("L\article a été supprimé");</script>';
+			require('./view/backend/confirmation.php');
 
 		}
 }
 function removeComment($id)
 {
-	echo 'controleur';
+	
 	$removeComment = new CommentManager();
 	$remove = $removeComment->removeComment($_GET['id']);
 
@@ -149,13 +117,13 @@ function removeComment($id)
 	}
 		else {
 
-			echo '<script>alert("Le commentaire a été supprimé");</script>';
+			require('./view/backend/confirmation.php');
 
 		}
 }
 function keepComment($id)
 {
-	echo 'controleur';
+	
 	$keepComment = new CommentManager();
 	$keep = $keepComment->keepComment($_GET['id']);
 

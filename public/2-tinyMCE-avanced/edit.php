@@ -60,13 +60,27 @@ session_destroy();
 			
 		});
 	</script>
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
+	<div class="container">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Bienvenue dans l'espace administrateur</a>
+                </div>
+                    <ul class="nav navbar-nav">
+                        <li class="col-xs-12 col-md-4"><a href="edit.php">Ecrire un nouvel article</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="../../index.php?action=getReport">Modérer les commentaires</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="../../view/backend/connect.php">Se déconnecter</a></li>
+                    </ul>           
+            </nav>
+
+
 	<h1>Billet simple pour l'aslaka !</h1>
 	<h2>Nouveau billet</h2>
 	<form name="formulaire" id="addPost" action="/p3/index.php?action=addPost" method="post">
 		<label for="title">Titre de l'article</label>
-		<input type="text" name="title" id="title" />
+		<input type="text" name="title" id="title" value=""/>
 		<br />
 		<br />
 		<textarea id="content" name="content" rows="25"></textarea>
@@ -77,10 +91,8 @@ session_destroy();
 		<div class="button">
         <input type="submit" value="Publier l'article" />
     	</div>
-    	<div class="button"><a href="http://localhost/p3/index.php?action=draftCopy"><input type="button" name="Brouillon"value="Brouillon"/></a>
-    	</div>
-    	<a href="../../../p3/view/backend/deconnexion.php" target="_blank">Déconnexion</a>
-    	<a href="../../index.php?action=getConnect" target="_blank">Retourner à la page administration sans enregistrer</a>
-	</form>
+    </form>
+
+</div>
 </body>
 </html>

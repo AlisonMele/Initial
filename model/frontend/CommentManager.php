@@ -7,7 +7,7 @@ class CommentManager extends Manager
 	public function getComment()
 	{
 		$db = $this->dbConnect();
-		$back = $db->query('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM comments WHERE action <= 9 ORDER BY comment_date DESC');
+		$back = $db->query('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM comments WHERE action = 0 ORDER BY comment_date DESC');
 		return $back;
 	}
 	public function getComments($postId)
@@ -25,7 +25,7 @@ class CommentManager extends Manager
 
 		return $affectedLines;
 	}
-	public function reportComment($id) //CREER UE BOUCLE POUR AJOUTER 1 A CHAQUE SIGNALEMENT
+	public function reportComment($id)
 	{
 		$db = $this->dbConnect();
 		$report = $db->prepare('UPDATE `comments` SET `action` = 1 WHERE id= ?'); 

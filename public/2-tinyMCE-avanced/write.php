@@ -60,18 +60,32 @@ session_destroy();
 			
 		});
 	</script>
+	<link rel="stylesheet" href="./public/bootstrap/css/bootstrap.min.css" />
+
 </head>
 <body>
+<div class="container">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Bienvenue dans l'espace administrateur</a>
+                </div>
+                    <ul class="nav navbar-nav">
+                        <li class="col-xs-12 col-md-4"><a href="./public/2-tinyMCE-avanced/edit.php">Ecrire un nouvel article</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="index.php?action=getReport">Modérer les commentaires</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="./connect.php">Se déconnecter</a></li>
+                    </ul>           
+            </nav>
+
 <div>
-	<?php
-	while ($data = $edit->fetch())
-	{
+<?php
+while($data = $edit->fetch())
+{
 	?>
 	<h1>Billet simple pour l'aslaka !</h1>
 	<h2>Modifier un article</h2>
-	<form name="formulaire" id="addPost" action="/p3/index.php?action=newPost&amp;id=<?= $data['id'] ?>" method="post">
-		<label for="title">Titre de l'article</label>
-		<input type="text" name="title" id="title" value="<?= $data['title'] ?>" />
+	<form name="formulaire" id="addPost" action="index.php?action=newPost&amp;id=<?= $data['id'] ?>" method="post">
+		
+		<input type="text" name="title" id="title" value="<?= $data['title'] ?>" placeholder="Votre titre" />
 		<br />
 		<br />
 		<textarea id="content" name="content" rows="25"><?= htmlspecialchars_decode($data['content']) ?></textarea>
@@ -85,10 +99,11 @@ session_destroy();
     	<a href="../../../p3/view/backend/deconnexion.php" target="_blank">Déconnexion</a>
     	<a href="../../p3/index.php?action=getConnect" target="_blank">Retourner à la page administration sans enregistrer</a>
 	</form>
-	<?php
+<?php
 }
-$edit->closeCursor();
 ?>
 </div>
+</div>
 </body>
+
 </html>

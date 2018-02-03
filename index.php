@@ -7,7 +7,7 @@ else
 {
     echo '<script>alert("Vous devez être connecté !");</script>';
     require('index.php');
-}*/
+}
 
 /*$cookiefin = time()+60*60*24;//Cookie valable 1 jour
 setcookie('pseudo', $_SESSION['pseudo'], $cookiefin);*/
@@ -21,19 +21,9 @@ if (isset($_GET['action'])) {
         echo 'routeur';        
         getReport();
     }
-
-   /* if ($_GET['action'] == 'listComments') {
-        if(isset($_POST['author']) && !empty($_POST['comment'])) {
-                listComments($_GET['author'], $_GET['comment']);
-         }
-        else {
-            echo 'erreur vérif routeur';
-        }
-    }*/
     if ($_GET['action'] == 'removePost') {
         removePost($_GET['id']);
     }
-
     if ($_GET['action'] == 'removeComment') {
         removeComment($_GET['id']);
     }
@@ -73,18 +63,24 @@ if (isset($_GET['action'])) {
     }
 
     if ($_GET['action'] == 'editPost') {
+        $newpostId = $_GET['id'];
                 editPost($_GET['id']);
-    }
+}
     if ($_GET['action'] == 'newPost') {
+        $id = $_GET['id'];
+        $title = htmlspecialchars($_POST['title'], ENT_QUOTES);
         $content = htmlspecialchars($_POST['content'], ENT_QUOTES);
+        if (isset($id)) {
             if (!empty($_POST['title']) && !empty($_POST['content'])) {
-                newPost($_POST['title'], $_POST['content']);
+                newPost($_GET['id'], $_POST['title'], $_POST['content']);
             }
             else {
                 echo 'Erreur : tous les champs ne sont pas remplis !';
             }
-    }
-    if ($_GET['action'] == 'draftCopy') {
+            }
+        }
+    
+   /* if ($_GET['action'] == 'draftCopy') {
             echo 'routeur';
             if (!empty($_POST['title']) && !empty($_POST['content'])) {
                 draftCopy($_POST['title'], $_POST['content']);
@@ -92,9 +88,15 @@ if (isset($_GET['action'])) {
             else {
                 echo 'Erreur : tous les champs ne sont pas remplis !';
             }
-    }
+    }*/
     if ($_GET['action'] == 'listPosts') {
         listPosts();
+    }
+   if ($_GET['action'] == 'backPost') {
+        backPost();
+    }
+    if ($_GET['action'] == 'adminBack') {
+        adminBack();
     }
 
     elseif ($_GET['action'] == 'post') {
@@ -127,17 +129,3 @@ if (isset($_GET['action'])) {
 else {
     listPosts();
 }
-
-/*if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'listReport') {
-            listReport();
-        }    
-        elseif ($_GET['action'] == 'listReport') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
-            }
-            else {
-                echo 'Erreur : aucun identifiant de billet envoyé';
-            }
-        }
-    }*/

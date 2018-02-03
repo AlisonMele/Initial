@@ -5,8 +5,6 @@ require("model/Manager.php");
 class PostManager extends Manager
 {
 
-	private $title;
-	private $content;
 
 	public function getPosts()
 	{
@@ -31,32 +29,27 @@ class PostManager extends Manager
 
 		return $affectedLines;
 	}
-		/*public function draftCopy($title, $content)
-	{
-		$db = $this->dbConnect();
-		$post = $db->prepare('INSERT INTO `posts`(`title`, `content`, `creation_date`) VALUES (?, ?, NOW())');
-		$affectedLines = $post->execute(array($title, $content));
-
-		return $affectedLines;
-	}*/
-		public function editPost($postId)
+	public function editPost($postId)
 	{
 		$db = $this->dbConnect();
 		$edit_post = $db->prepare('SELECT * FROM`posts`WHERE id = ?');
 		$edit_post -> execute(array($postId));
-
 		//$edit_post = $edit_post->fetch();
 		return $edit_post;
 	}
-	public function newPost($title, $content)
+	public function newPost($title, $content, $id)
 	{
 		$db = $this->dbConnect();
-		$newPost = $db->prepare('UPDATE`posts`SET `title` =:title, `content` =:content WHERE id = ?');
-		//$savePost = $newPost->execute(array($title, htmlspecialchars($content)));	
-		$newPost -> bindParam(':title', $_POST['title'], PDO::PARAM_STR);
-        $newPost -> bindParam(':content', $_POST['content'], PDO::PARAM_STR);
-		$newPost -> execute();
-		return $newPost;
+		$newpost = $db->prepare('UPDATE `posts` SET `title` = ?, `content` = ? WHERE `id` = ?');
+		//$newPost = $db->prepare('INSERT INTO `posts`(`id`, `title`, `content`, `creation_date`) VALUES ($postId, ?, NOW())');		//$savePost = $newPost->execute(array($title, htmlspecialchars($content)));	/	
+     
+		//$newpost -> bindParam(':title', $_POST['title'], PDO::PARAM_STR);
+        //$newpost -> bindParam(':content', $_POST['content'], PDO::PARAM_STR);
+        //$newPost -> bindParam(':id', $newpostId, PDO::PARAM_STR);
+   		//$newpost -> bindParam(':id', $id, PDO::PARAM_STR);
+		$newpost -> execute(array($title, $content, $id));
+		
+		return $newpost;
 
 	}
 		public function removePost($postId)

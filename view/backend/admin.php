@@ -1,6 +1,11 @@
+<?php
+session_start();
+
+?>
 <?php $title = htmlspecialchars_decode('Billet simple pour l\'Alaska'); ?>
 <head>
-<meta charset="utf-8">
+<meta charset="utf8">
+<link rel="stylesheet" href="public/bootstrap/css/bootstrap.min.css" />
 </head>
 
 <body>
@@ -13,7 +18,7 @@
                     <ul class="nav navbar-nav">
                         <li class="col-xs-12 col-md-4"><a href="public/2-tinyMCE-avanced/edit.php">Ecrire un nouvel article</a></li>
                         <li class="col-xs-12 col-md-4"><a href="index.php?action=getReport">Modérer les commentaires</a></li>
-                        <li class="col-xs-12 col-md-4"><a href="view/backend/deconnexion.php">Se déconnecter</a></li>
+                        <li class="col-xs-12 col-md-4"><a href="./connect.php">Se déconnecter</a></li>
                     </ul>           
             </nav>
 </div>
@@ -31,7 +36,7 @@ while ($data = $posts->fetch())
         <?= nl2br(htmlspecialchars_decode($data['title'])) ?>
         <em>le <?= $data['creation_date_fr'] ?> - </em><a href="index.php?action=removePost&amp;id=<?= $data['id'] ?>">Supprimer</a> - <a href="index.php?action=editPost&amp;id=<?= $data['id'] ?>">Modifier</a>
     </h3>
-    
+
     <p>
         <?= nl2br(htmlspecialchars_decode($data['content'])) ?>
     </p>
@@ -40,6 +45,7 @@ while ($data = $posts->fetch())
 }
 $posts->closeCursor();
 ?>
+
 </div>
 </div>
 </body>

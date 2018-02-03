@@ -1,5 +1,9 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
 <?php $title = 'Billet simple pour l\'Alaska '; ?>
-
+<link rel="stylesheet" href="./public/bootstrap/css/bootstrap.min.css" />
+</head>
 <?php ob_start(); ?>
  <div class="container">
             <nav class="navbar navbar-default">
@@ -27,3 +31,5 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php require('../template.php'); ?>
+
+</html>
